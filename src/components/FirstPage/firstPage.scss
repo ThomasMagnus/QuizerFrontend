@@ -1,0 +1,14 @@
+.firstPage {
+    &__wrapper {
+        background-color: white;
+        border-radius: 20px;
+        overflow: hidden;
+    }
+    &__title {
+        font-size: 30px;
+        margin: 0;
+    }
+    &__stack {
+        border-radius: 20px;
+    }
+}

@@ -1,0 +1,89 @@
+﻿.main {
+    display: block;
+    .container {
+        display: block !important;
+    }
+    .user {
+        &__info {
+            display: flex;
+            justify-content: end;
+        }
+        &__info-container {
+            margin-top: 20px;
+            text-align: end;
+            width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 20px;
+        }
+        &__nav {
+            padding: 10px;
+            flex: 1 1 30%;
+        }
+        &__material {
+            padding: 10px;
+            flex: 1 1 70%;
+        }
+        &__toolBar {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-around;
+        }
+        &__files {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            border-bottom: 1px solid black;
+            &:nth-child(n + 2) {
+                margin: 30px 0;
+            }
+        }
+        &__item {
+            margin: 10px 0;
+            cursor: pointer;
+            transition: color 0.2s linear;
+            &:hover {
+                color: #0d6efd;
+            }
+        }
+        &__fileList {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0;
+        }
+        &__fileItem {
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: center;
+            margin: 0 5px;
+            width: 100px;
+        }
+        .loadLink {
+            display: flex;
+            width: 150px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            .img {
+                width: 50px;
+                img {
+                    width: 100%;
+                }
+            }
+        }
+        .img {
+            img {
+                width: 50px;
+            }
+        }
+        .fileTitle {
+            text-align: center;
+            width: 100px;
+        }
+    }
+}
+
+.activeSubject {
+    color: #0d6efd;
+}
