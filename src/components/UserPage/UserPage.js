@@ -18,7 +18,8 @@ class UserPage extends React.Component {
         tasks: [],
         fileDates: [],
         modal: false,
-        getResponse: false
+        getResponse: false,
+        tasksByDates: [],
     }
 
     subjectsRef = React.createRef()
@@ -48,10 +49,28 @@ class UserPage extends React.Component {
                     data.forEach(item => {
                         uniqueMassDates.add(new Date(item.putdate).toLocaleDateString())
                     })
+                    console.log(uniqueMassDates)
+                    let tasksMassByDates = []
                     uniqueMassDates.forEach(item => {
+                        // console.log(item)
                         let mass = data.filter(elem => new Date(elem.putdate).toLocaleDateString() === item)
-                        resultMass.push(mass)
+                        let tasksData = {}
+                        tasksData[item] = mass
+                        tasksMassByDates.push(tasksData)
+                        // resultMass.push(mass)
                     })
+                    this.setState({tasksByDates: tasksMassByDates})
+
+                    // console.log(this.state.tasksByDates)
+                    this.state.tasksByDates.forEach(item => {
+                        let key = Object.keys(item)[0]
+                        item[key].forEach(elem => {
+                            console.log(elem)
+                        })
+
+                    })
+                    // console.log(this.state.tasks)
+
                     this.setState({fileDates: uniqueMassDates})
                     this.setState({tasks: resultMass})
                 })
@@ -89,23 +108,6 @@ class UserPage extends React.Component {
     async componentDidMount() {
         await getPage(this.props.url + "UserPage/GetSubjects", 'accessToken')
             .then(data => this.setState({subjects: data}))
-
-        // await this.getTasks()
-        //     .then(data => {
-        //         this.setState({tasks: data})
-        //         let uniqueMassDates = new Set()
-        //         let resultMass = []
-        //         data.forEach(item => {
-        //             uniqueMassDates.add(new Date(item.putdate).toLocaleDateString())
-        //         })
-        //         uniqueMassDates.forEach(item => {
-        //             console.log(item)
-        //             let mass = data.filter(elem => new Date(elem.putdate).toLocaleDateString() === item)
-        //             resultMass.push(mass)
-        //         })
-        //         this.setState({fileDates: uniqueMassDates})
-        //         this.setState({tasks: resultMass})
-        //     })
     }
 
     render() {
@@ -140,17 +142,17 @@ class UserPage extends React.Component {
                                 </nav>
                                 <div className="user__material">
                                     {
-                                        this.state.tasks.length !== 0 ?
-                                            this.state.tasks.map((item, index) => {
+                                        this.state.tasksByDates.length !== 0 ?
+                                            this.state.tasksByDates.map((item, index) => {
                                                 return (
                                                     <div className="user__files" key={index}>
                                                         <div className="date">
-                                                            <p>{this.state.fileDates ? this.state.fileDates : ''}</p>
+                                                            <p>{Object.keys(item)[0]}</p>
                                                         </div>
                                                         <div className="file">
                                                             <ul className="user__fileList">
                                                                 {
-                                                                    item.map((elem, key) =>
+                                                                    item[Object.keys(item)[0]].map((elem, key) =>
                                                                         <li key={key} className="user__fileItem">
                                                                             <a href={elem.filepath.trim()} download className="loadLink">
                                                                                 <span className="img">
