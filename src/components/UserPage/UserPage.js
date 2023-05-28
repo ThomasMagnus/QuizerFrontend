@@ -30,7 +30,7 @@ class UserPage extends React.Component {
         
         if (target.tagName === 'LI') {
             
-            for (let item of this.subjectsRef.current.children){
+            for (let item of this.subjectsRef.current.children) {
                 item.classList.remove("activeSubject")
             }
 
@@ -46,30 +46,26 @@ class UserPage extends React.Component {
                     this.setState({tasks: data})
                     let uniqueMassDates = new Set()
                     let resultMass = []
+
                     data.forEach(item => {
                         uniqueMassDates.add(new Date(item.putdate).toLocaleDateString())
                     })
-                    console.log(uniqueMassDates)
+                    
                     let tasksMassByDates = []
                     uniqueMassDates.forEach(item => {
-                        // console.log(item)
                         let mass = data.filter(elem => new Date(elem.putdate).toLocaleDateString() === item)
                         let tasksData = {}
                         tasksData[item] = mass
                         tasksMassByDates.push(tasksData)
-                        // resultMass.push(mass)
                     })
                     this.setState({tasksByDates: tasksMassByDates})
 
-                    // console.log(this.state.tasksByDates)
                     this.state.tasksByDates.forEach(item => {
                         let key = Object.keys(item)[0]
                         item[key].forEach(elem => {
                             console.log(elem)
                         })
-
                     })
-                    // console.log(this.state.tasks)
 
                     this.setState({fileDates: uniqueMassDates})
                     this.setState({tasks: resultMass})
@@ -101,8 +97,6 @@ class UserPage extends React.Component {
         if (this.response.status === 200) {
             return await this.response.json()
         }
-    
-        console.log(this.response.statusText)
     }
 
     async componentDidMount() {
@@ -165,22 +159,14 @@ class UserPage extends React.Component {
                                                                         </li>
                                                                     )
                                                                 }
-                                                                {/*<li>*/}
-                                                                {/*    <a href="/" download className="loadLink">*/}
-                                                                {/*        <span className="img">*/}
-                                                                {/*            <img src="img/doc.png" alt="Задание"/>*/}
-                                                                {/*        </span>*/}
-                                                                {/*        <span>Название файла</span>*/}
-                                                                {/*    </a>*/}
-                                                                {/*</li>*/}
                                                             </ul>
                                                         </div>
                                                     </div>
                                                 )
                                             }) :
-                                                    <div className='img'>
-                                                        {this.state.getResponse ? <img src="img/spinner.gif" alt="спиннер"/> : ""}
-                                                    </div>
+                                                <div className='img'>
+                                                    {this.state.getResponse ? <img src="img/spinner.gif" alt="спиннер"/> : ""}
+                                                </div>
                                     }
                                 </div>
                             </div>

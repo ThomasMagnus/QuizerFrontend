@@ -9,6 +9,7 @@ import TeacherAuth from "./components/TeacherAuth/TeacherAuth";
 import './app.scss'
 import FirstPage from "./components/FirstPage/FirstPage";
 import AddTask from "./components/AddTask/AddTask";
+import ViewingTasks from './components/ViewingTasks/ViewingTasks';
 
 export default class App extends Component {
 
@@ -97,6 +98,7 @@ export default class App extends Component {
                     <Route path="/UserPage/Index" element={<UserPage url={this.serverURL}/>}/>
                     <Route path={"/Teacher/TeacherPage/" + this.state.teacherData['login']} element={<TeacherPage appState={this.state} url={this.serverURL}/>}/>
                     <Route path={"/Teacher/AddTask"} element={<AddTask login={this.state.teacherData["login"]} url={this.serverURL}/>}/>
+                    <Route path={"/Teacher/Preview"} element={<ViewingTasks url={this.serverURL}/>}/>
                 </Routes>
             </Main>
         );

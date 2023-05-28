@@ -4,11 +4,13 @@ import './addTask.scss'
 import {Link} from "react-router-dom";
 import './addTask.scss'
 import {postDataValue} from '../../Services/services'
+import { TeacherHelper } from '../../Services/helpers';
 
 class AddTask extends React.Component {
     // eslint-disable-next-line no-useless-constructor
     constructor(props) {
         super(props);
+        this.teacherHelper = new TeacherHelper(this)
     }
 
     state = {
@@ -20,21 +22,6 @@ class AddTask extends React.Component {
 
     formRef = React.createRef()
     fileRef = React.createRef()
-
-    getGroup = (e) => {
-        const target = e.target
-        this.setState({group: target.value})
-        // if (Object.keys(this.state.teacherData).includes(target.value)) this.setState({group: target.value})
-        // else this.setState({group: null})
-        
-        console.log(this.state)
-    }
-
-    getSubjects = (e) => {
-        const target = e.target
-        this.setState({subject: target.value})
-        console.log(this.state)
-    }
 
     getFile = (e) => {
         const target = e.target
@@ -68,7 +55,7 @@ class AddTask extends React.Component {
             <>
                 <h1>Выложить задание</h1>
                 <Form className='form' ref={this.formRef}>
-                    <Form.Select aria-label="Default select example" name='subjectName' onChange={(e) => this.getSubjects(e)}>
+                    <Form.Select aria-label="Default select example" name='subjectName' onChange={(e) => this.teacherHelper.getSubjects(e)}>
                         <option>Выберете предмет:</option>
                         {this.state.teacherData ? 
                             Object.keys(this.state.teacherData).map((item, i) => (
@@ -78,7 +65,7 @@ class AddTask extends React.Component {
                             ""
                         }
                     </Form.Select>
-                    <Form.Select aria-label="Default select example" name='groupName' onChange={(e) => this.getGroup(e)}>
+                    <Form.Select aria-label="Default select example" name='groupName' onChange={(e) => this.teacherHelper.getGroup(e)}>
                         <option>Выберете группу:</option>
                         {
                             this.state.subject !== null && Object.keys(this.state.teacherData).includes(this.state.subject) ?

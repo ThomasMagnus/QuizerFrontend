@@ -237,8 +237,12 @@ class TeacherPage extends Component {
                             <Row>
                                 <Col>
                                     <h1>Личный кабинет</h1>
-                                    <p className="admin__name">Преподаватель: <span>{this.props.appState.teacherData['username']}</span>
+                                    <p className="admin__name">
+                                        Преподаватель: <span>{this.props.appState.teacherData['username']}</span>
                                     </p>
+                                    <Link to={'/Teacher/Preview'}>
+                                        <Button variant="primary" className="w-10">Посмотреть задания</Button>
+                                    </Link>
                                 </Col>
                                 <Col>
                                     <div className="admin__info">
@@ -301,7 +305,7 @@ class TeacherPage extends Component {
                                     <Form ref={this.formRef}>
                                         <Form.Control type="text" placeholder="Введите название предмета" name="subject"
                                                       onInput={this.getValuesProps}/>
-                                        <p className="group" ref={this.groupRef}>
+                                            <p className="group" ref={this.groupRef}>
                                             <Form.Control type="text" placeholder="Введите название группы"
                                                           className='mt-2 groupsName' name="group"/>
                                             <span className="groupAction addGroupInput" onClick={this.addGroupInput}>+</span>
