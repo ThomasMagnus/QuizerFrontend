@@ -43,32 +43,7 @@ class UserPage extends React.Component {
                     return response.json()
                 })
                 .then(data => {
-                    this.setState({tasks: data})
-                    let uniqueMassDates = new Set()
-                    let resultMass = []
-
-                    data.forEach(item => {
-                        uniqueMassDates.add(new Date(item.putdate).toLocaleDateString())
-                    })
-                    
-                    let tasksMassByDates = []
-                    uniqueMassDates.forEach(item => {
-                        let mass = data.filter(elem => new Date(elem.putdate).toLocaleDateString() === item)
-                        let tasksData = {}
-                        tasksData[item] = mass
-                        tasksMassByDates.push(tasksData)
-                    })
-                    this.setState({tasksByDates: tasksMassByDates})
-
-                    this.state.tasksByDates.forEach(item => {
-                        let key = Object.keys(item)[0]
-                        item[key].forEach(elem => {
-                            console.log(elem)
-                        })
-                    })
-
-                    this.setState({fileDates: uniqueMassDates})
-                    this.setState({tasks: resultMass})
+                    this.teacherHelper.getTasks(data);
                 })
                 .catch(error => {
                     console.log(error)
